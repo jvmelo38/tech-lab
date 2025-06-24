@@ -78,5 +78,5 @@ nginx-reverse-proxy/
 ## 👤 Author
 
 **João Melo**  
-Cloud Solutions Architect  
+Cloud 
 [https://github.com/seu-usuario](https://github.com/seu-usuario)
