@@ -48,7 +48,7 @@ server {
     ssl_certificate_key /etc/nginx/ssl/key.pem;
 
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass https://localhost:3000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
@@ -82,17 +82,6 @@ Or access the page on the unnamed DNS via browser
 
 ---
 
-## 🔒 Free SSL with Let's Encrypt (Opicional)
-
-To generate a free SSL certificate and apply it automatically:
-
-```bash
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx
-```
-
----
-
 ## 🗂️ Suggested File Structure
 
 ```
@@ -105,10 +94,56 @@ nginx-reverse-proxy/
     └── key.pem
 ```
 
+## ⚠️ Attention: server_names_hash_bucket_size
+
+If you're using long domain names or multiple subdomains in your configuration, you might encounter an error like:
+
+```bash
+[emerg] could not build server_names_hash
+```
+
+To fix this, you can increase the hash bucket size in your nginx.conf:
+
+```bash
+http {
+    server_names_hash_bucket_size 128;
+
+    ...
+}
+```
+
+## 🌐 Multiple server {} blocks for multiple domains
+
+NGINX allows you to define multiple server {} blocks, each responding to different domain names (FQDNs).
+
+Example:
+
+```bash
+server {
+    listen 80;
+    server_name site1.example.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+    }
+}
+
+server {
+    listen 80;
+    server_name site2.example.com;
+
+    location / {
+        proxy_pass http://localhost:4000;
+    }
+}
+
+```
+This way, based on the incoming DNS (e.g., site1.example.com vs site2.example.com), NGINX can route traffic to different applications or services.
+
 ---
 
 ## 👤 Author
 
 **João Melo**  
-Cloud Solutions Architect  
+Cloud Analyst
 https://github.com/jvmelo38/
