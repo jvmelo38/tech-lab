@@ -29,8 +29,11 @@ Extract the .zip to a folder like C:\nginx.
 
 Open a Command Prompt or PowerShell and navigate to the folder:
 
+```bash
 cd C:\nginx
 start nginx
+```
+⚠️ On Windows, NGINX doesn't run as a service by default. For production, Linux is recommended, However, it can be programmed to start via a schedule task.
 
 ## ⚙️ Sample Configuration
 
