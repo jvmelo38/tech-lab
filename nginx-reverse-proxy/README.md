@@ -33,3 +33,50 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 }
+```
+
+> This will forward HTTPS requests from `https://app.example.com` to a service running on `localhost:3000`.
+
+---
+
+## 🧪 Testing the Configuration
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Use `curl -I https://app.example.com` to verify the response headers.
+
+---
+
+## 🔒 Free SSL with Let's Encrypt
+
+To generate a free SSL certificate and apply it automatically:
+
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx
+```
+
+---
+
+## 🗂️ Suggested File Structure
+
+```
+nginx-reverse-proxy/
+├── README.md
+├── config/
+│   └── example.conf
+└── ssl/
+    ├── cert.pem
+    └── key.pem
+```
+
+---
+
+## 👤 Author
+
+**João Melo**  
+Cloud Solutions Architect  
+[https://github.com/seu-usuario](https://github.com/seu-usuario)
