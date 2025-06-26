@@ -9,7 +9,7 @@ This guide explains how to configure NGINX as a reverse proxy to redirect traffi
 A reverse proxy accepts client requests and forwards them to an internal server. It helps with:
 
 - Exposing a web app running on another port (e.g., :3000)
-- Applying HTTPS even if the app runs in plain HTTP
+- Applying HTTPS even if the app runs in plain HTTPs
 - Hiding internal structure
 - Load balancing
 
@@ -120,20 +120,20 @@ Example:
 
 ```bash
 server {
-    listen 80;
+    listen 443;
     server_name site1.example.com;
 
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass https://localhost:3000;
     }
 }
 
 server {
-    listen 80;
+    listen 443;
     server_name site2.example.com;
 
     location / {
-        proxy_pass http://localhost:4000;
+        proxy_pass https://localhost:4000;
     }
 }
 
